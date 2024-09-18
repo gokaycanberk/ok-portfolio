@@ -1,0 +1,14 @@
+.banner {
+  background-image: url('../assets/images/main-page-banner.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  height: 400px !important;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
+
+.banner h1,
+.banner p {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}

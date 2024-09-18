@@ -1,0 +1,79 @@
+body,
+body {
+  color: black;
+}
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.project-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0; /* Reduced margin between sections */
+}
+
+.project {
+  flex: 1;
+  padding: 30px;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+}
+
+.project h2,
+.project p,
+.project a {
+  text-align: center;
+  margin: 0;
+}
+
+.interior {
+  background-image: url('../assets/images/main-page-interior1.jpg');
+}
+
+.digital {
+  background-image: url('../assets/images/main-page-digital2.jpg');
+}
+
+.art {
+  background-image: url('../assets/images/main-page-art.jpg');
+}
+
+.project:hover {
+  transform: scale(1.05);
+}
+
+footer {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: 0;
+}
+.bio-section {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Soft background for readability */
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #333; /* Darker text color for readability */
+  text-align: center; /* Center-aligns text */
+}
