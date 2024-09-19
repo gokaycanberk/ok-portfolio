@@ -1,14 +1,31 @@
 .banner {
-  background-image: url('../assets/images/main-page-banner.jpg') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  height: 400px !important;
-  margin-bottom: 0;
-  padding-bottom: 20px;
+  padding-top: 120px;
+  padding-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: white;
+}
+div.banner {
+  padding-top: 120px;
+  padding-bottom: 45px;
 }
 
-.banner h1,
+/* Başlık solda ve büyük olacak */
+.banner h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-left: 40px; /* Başlığın menüyle olan uzaklığını ayarladık */
+  text-align: justify;
+  color: #333; /* Renk ayarı */
+}
+
+/* Paragraf sağda toplu olacak */
 .banner p {
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  max-width: 600px; /* Paragrafa bir genişlik sınırlaması koy */
+  text-align: justify;
+  margin-right: 40px; /* Paragrafın menüyle olan uzaklığı eşit olacak */
+  color: #555; /* Yazı rengini daha açık bir gri yaparak okunabilirliği arttıralım */
+  line-height: 1.6; /* Satır aralığı */
+  padding-top: 20px; /* Paragrafın üst boşluğunu biraz arttırdık */
 }

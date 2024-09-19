@@ -8,62 +8,6 @@ body,
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-.project-container {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 0;
-}
-
-.project {
-  flex: 1;
-  padding: 30px;
-  background-size: cover;
-  background-position: center;
-  height: 300px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  transition: transform 0.3s ease;
-  border-radius: 10px;
-}
-
-.project h2,
-.project p,
-.project a {
-  text-align: center;
-  margin: 0;
-}
-
-.interior {
-  background-image: url('../assets/images/main-page-interior1.jpg');
-}
-
-.digital {
-  background-image: url('../assets/images/main-page-digital2.jpg');
-}
-
-.art {
-  background-image: url('../assets/images/main-page-art.jpg');
-}
-
-.project:hover {
-  transform: scale(1.05);
-}
-
-footer {
-  background-color: #1e1e1e;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  margin-top: 0;
-  width: 100%; /* Full-width for footer */
-  position: relative;
-  bottom: 0; /* Make sure it sticks to the bottom */
-}
-
 /* Timeline container */
 .timeline-container {
   max-width: 1280px;
@@ -145,17 +89,5 @@ footer {
     width: 90%; /* Adjust to reduce the width slightly */
     margin: 0 auto; /* Ensure items are centered */
     max-width: none; /* Remove max-width for mobile */
-  }
-  .project-container {
-    flex-direction: column;
-  }
-
-  .project {
-    margin-bottom: 20px; /* Adds space between stacked projects */
-  }
-
-  footer {
-    padding: 20px;
-    width: 100%; /* Ensure footer is full width on mobile */
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Header.css';
+import '../styles/Header.css'; // CSS dosyasının yolu
 
 const Header = () => {
   return (
@@ -9,7 +9,7 @@ const Header = () => {
       <Link to="/interior">Interior</Link>
       <Link to="/digital">Digital</Link>
       <Link to="/art">Art</Link>
-      <Link to="/contact">Contact</Link>
+      <Link to="/about">About</Link>
     </nav>
   );
 };
