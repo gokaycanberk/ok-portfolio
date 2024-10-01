@@ -1,0 +1,22 @@
+.slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.slide {
+  text-align: center;
+}
+
+.slide img {
+  width: 600px;
+  height: auto;
+}
+
+button {
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}

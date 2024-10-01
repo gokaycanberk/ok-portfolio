@@ -1,0 +1,32 @@
+.project-card {
+  display: block;
+  text-align: center;
+  margin: 20px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease-in-out;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+}
+
+.project-info {
+  padding: 10px;
+  background-color: #fff;
+}
+
+.project-info h2 {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.project-info span {
+  display: block;
+  margin-top: 5px;
+  color: #777;
+}
