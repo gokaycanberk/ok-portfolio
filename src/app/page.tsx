@@ -1,101 +1,208 @@
+"use client";
+
+import TimeLocation from "@/components/TimeLocation";
+import HeroThreeD from "@/components/HeroThreeD";
 import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // Handle scroll to determine if we're in hero section or below
+  useEffect(() => {
+    const handleScroll = () => {
+      // When scrolled past hero section
+      setIsScrolled(window.scrollY > window.innerHeight * 0.8);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <main className="bg-white text-black relative w-full overflow-x-hidden">
+      {/* Hero Section with 3D Animation */}
+      <section className="min-h-screen relative w-full">
+        <HeroThreeD />
+      </section>
+
+      {/* Design Philosophy Section - inspired by oharchitecture.com.au */}
+      <section
+        id="scrollthis"
+        className="min-h-screen bg-white pt-16 pb-32 w-full"
+      >
+        <div className="w-full">
+          {/* First row - DESIGNING HOMES WITH */}
+          <div className="w-full mb-0 pl-10 md:pl-16 lg:pl-24">
+            <h2 className="text-7xl md:text-8xl font-normal leading-none">
+              DESIGNING
+              <br />
+              HOMES WITH
+            </h2>
+          </div>
+
+          {/* Second row - Photo and PEOPLE AT HEART */}
+          <div className="w-full px-0 mt-0">
+            <div className="flex justify-end pr-10 md:pr-16 lg:pl-[calc(320px-24px)]">
+              <div className="flex items-start">
+                <div
+                  className="w-[450px] h-[320px] relative"
+                  id="image-reference"
+                >
+                  <Image
+                    src="/images/img1.png"
+                    alt="Architecture design"
+                    fill
+                    style={{ objectFit: "cover" }}
+                    priority
+                    className="object-center"
+                  />
+                </div>
+                <div className="ml-0 mt-1">
+                  <h2 className="text-7xl md:text-8xl font-normal leading-none">
+                    PEOPLE
+                    <br />
+                    AT HEART
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Third row - Text section aligned with the image */}
+          <div className="w-full mt-20 px-0">
+            <div className="container mx-auto flex justify-center">
+              <div className="w-full max-w-4xl flex justify-start transform -translate-x-12 md:-translate-x-20 lg:-translate-x-24">
+                <div className="max-w-3xl">
+                  <p className="text-lg mb-10 font-normal">
+                    We design spaces for people. No matter the scale of the
+                    projects, our down-to-earth approach stays the same. We
+                    listen first, design second. We take the time to understand
+                    how you live, work, and move through your space.
+                  </p>
+                  <p className="text-lg mb-16 font-normal">
+                    Then, we bring your vision to life. Drawing from real
+                    experience, we create contemporary, aspirational spaces that
+                    feel effortless and truly yours.
+                  </p>
+                  <div className="mt-12">
+                    <a
+                      href="/studio"
+                      className="inline-flex items-center justify-center px-8 py-3 bg-black text-white text-sm uppercase tracking-wider hover:bg-gray-800 transition-colors rounded-full"
+                    >
+                      LEARN MORE ABOUT OUR STUDIO
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      </section>
+
+      {/* Fixed side navigation - only visible in hero section */}
+      <div
+        className={`fixed right-6 top-1/2 transform -translate-y-1/2 text-right z-50 transition-opacity duration-500 ${
+          isScrolled ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
+        <nav className="flex flex-col space-y-8">
+          <Link
+            href="/"
+            className="text-sm uppercase tracking-widest font-bold hover:text-red-600 transition-colors"
+          >
+            Home
+          </Link>
+          <Link
+            href="/portfolio"
+            className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
+          >
+            Portfolio
+          </Link>
+          <Link
+            href="/news"
+            className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
+          >
+            News
+          </Link>
+          <Link
+            href="/contact"
+            className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
+          >
+            Contact
+          </Link>
+        </nav>
+      </div>
+
+      {/* Bottom right time location */}
+      <div className="fixed bottom-6 right-6 text-right z-50">
+        <TimeLocation />
+      </div>
+
+      {/* Top navigation - only visible when scrolled */}
+      <div
+        className={`fixed top-6 right-6 z-50 flex items-center gap-4 transition-opacity duration-500 ${
+          isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/contact"
+          className="bg-black text-white text-xs uppercase tracking-widest px-5 py-3 rounded-full hover:bg-gray-800 transition-colors"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
+          GET IN TOUCH
         </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="relative">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-sm uppercase tracking-widest font-medium"
+          >
+            {isMenuOpen ? "CLOSE" : "MENU"}
+          </button>
+
+          {/* Dropdown menu */}
+          <div
+            className={`absolute right-0 top-full mt-2 bg-white p-4 w-48 transition-all duration-300 ${
+              isMenuOpen
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-4 pointer-events-none"
+            }`}
+          >
+            <nav className="flex flex-col space-y-4">
+              <Link
+                href="/"
+                className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href="/portfolio"
+                className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Portfolio
+              </Link>
+              <Link
+                href="/news"
+                className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                News
+              </Link>
+              <Link
+                href="/contact"
+                className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
