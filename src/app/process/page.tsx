@@ -1,21 +1,18 @@
 "use client";
 
+import OurProcess from "@/components/OurProcess";
 import TimeLocation from "@/components/TimeLocation";
-import HeroThreeD from "@/components/HeroThreeD";
-import DesignPhilosophy from "@/components/DesignPhilosophy";
-import Portfolio from "@/components/Portfolio";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-export default function Home() {
+export default function ProcessPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Handle scroll to determine if we're in hero section or below
   useEffect(() => {
     const handleScroll = () => {
-      // When scrolled past hero section
-      setIsScrolled(window.scrollY > window.innerHeight * 0.8);
+      setIsScrolled(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -23,56 +20,18 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-white text-black relative w-full overflow-x-hidden">
-      {/* Hero Section with 3D Animation */}
-      <section className="min-h-screen relative w-full">
-        <HeroThreeD />
+    <main className="bg-white text-black relative w-full">
+      {/* Page title */}
+      <section className="py-28 bg-white w-full">
+        <div className="w-full px-10 md:px-16 lg:px-24">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-normal">
+            Our Process
+          </h1>
+        </div>
       </section>
 
-      {/* Design Philosophy Section */}
-      <DesignPhilosophy />
-
-      {/* Portfolio Section */}
-      <Portfolio />
-
-      {/* Fixed side navigation - only visible in hero section */}
-      <div
-        className={`fixed right-6 top-1/2 transform -translate-y-1/2 text-right z-50 transition-opacity duration-500 ${
-          isScrolled ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-      >
-        <nav className="flex flex-col space-y-8">
-          <Link
-            href="/"
-            className="text-sm uppercase tracking-widest font-bold hover:text-red-600 transition-colors"
-          >
-            Home
-          </Link>
-          <Link
-            href="/portfolio"
-            className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
-          >
-            Portfolio
-          </Link>
-          <Link
-            href="/news"
-            className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
-          >
-            News
-          </Link>
-          <Link
-            href="/contact"
-            className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
-          >
-            Contact
-          </Link>
-        </nav>
-      </div>
-
-      {/* Bottom right time location */}
-      <div className="fixed bottom-6 right-6 text-right z-50">
-        <TimeLocation />
-      </div>
+      {/* Process Section */}
+      <OurProcess />
 
       {/* Top navigation - only visible when scrolled */}
       <div
@@ -128,6 +87,11 @@ export default function Home() {
             </nav>
           </div>
         </div>
+      </div>
+
+      {/* Bottom right time location */}
+      <div className="fixed bottom-6 right-6 text-right z-50">
+        <TimeLocation />
       </div>
     </main>
   );
