@@ -4,6 +4,7 @@ import TimeLocation from "@/components/TimeLocation";
 import HeroThreeD from "@/components/HeroThreeD";
 import DesignPhilosophy from "@/components/DesignPhilosophy";
 import Portfolio from "@/components/Portfolio";
+import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -35,9 +36,12 @@ export default function Home() {
       {/* Portfolio Section */}
       <Portfolio />
 
+      {/* Footer */}
+      <Footer />
+
       {/* Fixed side navigation - only visible in hero section */}
       <div
-        className={`fixed right-6 top-1/2 transform -translate-y-1/2 text-right z-50 transition-opacity duration-500 ${
+        className={`fixed right-6 top-1/2 transform -translate-y-1/2 text-right z-50 transition-opacity duration-500 hidden md:block ${
           isScrolled ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
@@ -83,9 +87,29 @@ export default function Home() {
         <div className="relative">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-sm uppercase tracking-widest font-medium"
+            className="text-sm uppercase tracking-widest font-medium flex items-center"
           >
-            {isMenuOpen ? "CLOSE" : "MENU"}
+            <span className="md:inline hidden mr-2">
+              {isMenuOpen ? "CLOSE" : "MENU"}
+            </span>
+            {/* Hamburger icon for mobile */}
+            <div className="md:hidden flex flex-col justify-center items-center w-6 h-6">
+              <span
+                className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                  isMenuOpen ? "rotate-45 translate-y-1" : "-translate-y-0.5"
+                }`}
+              ></span>
+              <span
+                className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
+                  isMenuOpen ? "opacity-0" : "opacity-100"
+                }`}
+              ></span>
+              <span
+                className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+                  isMenuOpen ? "-rotate-45 -translate-y-1" : "translate-y-0.5"
+                }`}
+              ></span>
+            </div>
           </button>
 
           {/* Dropdown menu */}

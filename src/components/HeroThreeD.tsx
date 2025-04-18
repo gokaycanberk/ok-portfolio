@@ -3,7 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
-const designCategories = ["Interior Design", "Digital Design", "Art"];
+const designCategories = [
+  "Interior Design",
+  "Digital Design",
+  "Art",
+  "Photography",
+];
 
 const HeroThreeD = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -148,7 +153,7 @@ const HeroThreeD = () => {
           ref={titleRef}
           className="text-center transition-transform duration-200 ease-out z-10"
         >
-          <h1 className="text-7xl font-light">
+          <h1 className="text-7xl md:text-8xl lg:text-9xl font-light">
             <span
               className={`inline-block min-h-[1.2em] min-w-[15rem] transition-opacity duration-600 ${
                 isFading ? "opacity-0" : "opacity-100"
