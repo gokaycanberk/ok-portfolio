@@ -1,37 +1,78 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import TimeLocation from "@/components/TimeLocation";
 
-const categories = [
+interface ArtWork {
+  id: number;
+  title: string;
+  category: string;
+  year: string;
+  image: string;
+}
+
+const artWorks: ArtWork[] = [
   {
     id: 1,
-    title: "Interior Design",
-    description: "Transforming spaces into timeless experiences",
+    title: "Abstract Composition I",
+    category: "Digital Art",
+    year: "2024",
     image: "/images/p4.jpg",
-    href: "/portfolio/interior-design",
   },
   {
     id: 2,
-    title: "Digital Design",
-    description: "Creating immersive digital experiences",
+    title: "Urban Landscape",
+    category: "Photography",
+    year: "2024",
     image: "/images/p4.jpg",
-    href: "/portfolio/digital-design",
   },
   {
     id: 3,
-    title: "Art Works",
-    description: "Exploring creativity through various mediums",
+    title: "Geometric Patterns",
+    category: "Digital Art",
+    year: "2023",
     image: "/images/p4.jpg",
-    href: "/portfolio/art-works",
+  },
+  {
+    id: 4,
+    title: "Nature Study",
+    category: "Photography",
+    year: "2023",
+    image: "/images/p4.jpg",
+  },
+  {
+    id: 5,
+    title: "Color Theory",
+    category: "Digital Art",
+    year: "2023",
+    image: "/images/p4.jpg",
+  },
+  {
+    id: 6,
+    title: "Light & Shadow",
+    category: "Photography",
+    year: "2023",
+    image: "/images/p4.jpg",
   },
 ];
 
-const PortfolioPage = () => {
+const ArtWorksPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
+  const [selectedWork, setSelectedWork] = useState<ArtWork | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (work: ArtWork) => {
+    setSelectedWork(work);
+    setIsModalOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = "auto";
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -46,7 +87,7 @@ const PortfolioPage = () => {
           </Link>
           <Link
             href="/portfolio"
-            className="text-sm uppercase tracking-widest font-bold hover:text-red-600 transition-colors"
+            className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
           >
             Portfolio
           </Link>
@@ -110,7 +151,7 @@ const PortfolioPage = () => {
               </Link>
               <Link
                 href="/portfolio"
-                className="text-sm uppercase tracking-widest font-bold hover:text-red-600 transition-colors"
+                className="text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Portfolio
@@ -139,46 +180,65 @@ const PortfolioPage = () => {
         <TimeLocation />
       </div>
 
-      {/* Categories */}
-      <div className="min-h-screen flex items-center">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {categories.map((category) => (
-              <Link
-                key={category.id}
-                href={category.href}
-                className="group relative"
-                onMouseEnter={() => setHoveredCategory(category.id)}
-                onMouseLeave={() => setHoveredCategory(null)}
+      {/* Art Works Grid */}
+      <div className="min-h-screen pt-24 pb-16 px-6">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {artWorks.map((work) => (
+              <div
+                key={work.id}
+                className="group cursor-pointer"
+                onClick={() => openModal(work)}
               >
-                <div className="relative aspect-[3/4] overflow-hidden">
+                <div className="relative aspect-square overflow-hidden">
                   <Image
-                    src={category.image}
-                    alt={category.title}
+                    src={work.image}
+                    alt={work.title}
                     fill
-                    className={`object-cover transition-transform duration-700 ${
-                      hoveredCategory === category.id
-                        ? "scale-110"
-                        : "scale-100"
-                    }`}
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-30 transition-opacity duration-500 group-hover:bg-opacity-50" />
-                  <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-6">
-                    <h2 className="text-3xl md:text-4xl font-light mb-4 text-center">
-                      {category.title}
-                    </h2>
-                    <p className="text-sm md:text-base text-center opacity-80">
-                      {category.description}
-                    </p>
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 text-white translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-xl font-light">{work.title}</h3>
+                    <p className="text-sm opacity-80 mt-2">{work.category}</p>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && selectedWork && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center">
+          <div className="relative w-full max-w-5xl mx-6">
+            <button
+              onClick={closeModal}
+              className="absolute -top-12 right-0 text-white text-sm uppercase tracking-widest hover:text-red-600 transition-colors"
+            >
+              Close
+            </button>
+            <div className="relative aspect-[4/3] w-full">
+              <Image
+                src={selectedWork.image}
+                alt={selectedWork.title}
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="mt-4 text-white">
+              <h2 className="text-2xl font-light">{selectedWork.title}</h2>
+              <div className="flex space-x-4 mt-2 text-sm opacity-80">
+                <span>{selectedWork.category}</span>
+                <span>{selectedWork.year}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default PortfolioPage;
+export default ArtWorksPage;
